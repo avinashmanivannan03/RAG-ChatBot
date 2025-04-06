@@ -9,3 +9,4 @@ python-dotenv
 torch
 transformers>=4.40.0
 sentence-transformers
+langchain-community
