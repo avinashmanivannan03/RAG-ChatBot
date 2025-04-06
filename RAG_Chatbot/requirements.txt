@@ -7,5 +7,5 @@ pytesseract
 Pillow
 python-dotenv
 torch
-transformers
+transformers>=4.40.0
 sentence-transformers
