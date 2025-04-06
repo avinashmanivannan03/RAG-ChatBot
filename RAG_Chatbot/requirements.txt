@@ -1,0 +1,9 @@
+streamlit
+langchain
+pytesseract
+pdf2image
+PyMuPDF
+together
+faiss-cpu
+sentence-transformers
+Pillow
