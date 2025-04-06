@@ -1,9 +1,11 @@
 streamlit
-langchain
+together
 pytesseract
 pdf2image
-PyMuPDF
-together
-faiss-cpu
-sentence-transformers
 Pillow
+python-dotenv
+langchain
+faiss-cpu
+transformers
+torch
+
