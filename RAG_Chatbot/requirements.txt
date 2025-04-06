@@ -11,3 +11,17 @@ transformers>=4.40.0
 sentence-transformers
 langchain-community
 pypdf
+
+streamlit
+langchain
+langchain-community
+transformers
+torch
+sentence-transformers
+faiss-cpu
+chromadb
+pypdf
+python-dotenv
+huggingface-hub
+tqdm
+numpy
