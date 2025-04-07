@@ -14,7 +14,7 @@ pypdf
 
 langchain==0.1.14
 langchain-community==0.0.31
-sentence-transformers==2.2.2
+sentence-transformers
 transformers==4.37.2
 torch==2.2.1
 
