@@ -80,7 +80,8 @@ if uploaded_file:
         docs = extract_text_from_pdf("temp.pdf")
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
         docs = text_splitter.split_documents(docs)
-        embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
         db = FAISS.from_documents(docs, embedding_model)
 
     st.success(f"Text indexed. Total chunks: {len(docs)}")
