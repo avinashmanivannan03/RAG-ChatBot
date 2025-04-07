@@ -28,21 +28,13 @@ def extract_text_from_pdf(pdf_path):
         if all(len(p.page_content.strip()) == 0 for p in pages):
             raise ValueError("Empty pages from loader.")
         return [Document(page_content=p.page_content) for p in pages]
-    except Exception as e:
-        st.warning(f"Standard PDF extraction failed: {e}\nSwitching to OCR mode...")
-        try:
-            # OCR fallback using pytesseract
-            from pdf2image import convert_from_path
-            images = convert_from_path(pdf_path)
-            texts = []
-            for img in images:
-                text = pytesseract.image_to_string(img)
-                texts.append(Document(page_content=text))
-            return texts
-        except Exception as ocr_error:
-            st.error(f"OCR also failed. Please ensure Poppler is installed. Error: {ocr_error}")
-            return []
-
+    except:
+        images = convert_from_path(pdf_path)
+        texts = []
+        for img in images:
+            text = pytesseract.image_to_string(img)
+            texts.append(Document(page_content=text))
+        return texts
 
 #LLaMA Response Generator
 def generate_llama_response(query, context):
