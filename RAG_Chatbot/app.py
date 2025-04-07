@@ -8,7 +8,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.schema import Document
 from langchain.document_loaders import PyPDFLoader
-from langchain_community.embeddings import TogetherEmbeddings
+#from langchain_community.embeddings import TogetherEmbeddings
 from langchain_together import TogetherEmbeddings
 import together
 import warnings
