@@ -23,20 +23,41 @@ st.set_page_config(page_title="PDF RAG Chatbot", layout="centered")
 st.title("RAG Chatbot for PDF (LLaMA + FAISS)")
 
 #PDF Extraction Function 
-def extract_text_from_pdf(pdf_path): 
+def extract_text_from_pdf(pdf_path):
     try:
+        from langchain.document_loaders import PyPDFLoader
         loader = PyPDFLoader(pdf_path)
         pages = loader.load()
         if all(len(p.page_content.strip()) == 0 for p in pages):
-            raise ValueError("Empty pages from loader.")
+            raise ValueError("Empty pages from PyPDFLoader")
+        print("Extracted using PyPDFLoader")
         return [Document(page_content=p.page_content) for p in pages]
-    except:
+    except Exception as e:
+        print(f"PyPDFLoader failed: {e}")
+
+    try:
+        print("Trying OCR (pdf2image + pytesseract)...")
         images = convert_from_path(pdf_path)
-        texts = []
-        for img in images:
-            text = pytesseract.image_to_string(img)
-            texts.append(Document(page_content=text))
-        return texts
+        docs = [Document(page_content=pytesseract.image_to_string(img)) for img in images]
+        if all(len(doc.page_content.strip()) == 0 for doc in docs):
+            raise ValueError("OCR returned empty text.")
+        print("Extracted using OCR")
+        return docs
+    except Exception as e:
+        print(f"OCR failed: {e}")
+
+    try:
+        print("Trying fallback: PyMuPDF...")
+        doc = fitz.open(pdf_path)
+        pages = [Document(page_content=page.get_text()) for page in doc]
+        print("Extracted using PyMuPDF")
+        return pages
+    except Exception as e:
+        print(f"PyMuPDF failed: {e}")
+        traceback.print_exc()
+
+    return []
+
 
 #LLaMA Response Generator
 def generate_llama_response(query, context):
