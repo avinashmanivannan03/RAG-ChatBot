@@ -8,6 +8,15 @@ Pillow
 python-dotenv
 
 
+streamlit
+pytesseract
+pdf2image
+pillow
+python-dotenv
+together
+faiss-cpu
+sentence-transformers
+langchain
 
 
 pypdf
