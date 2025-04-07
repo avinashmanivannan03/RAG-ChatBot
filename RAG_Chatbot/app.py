@@ -4,7 +4,7 @@ import pytesseract
 from pdf2image import convert_from_path
 from PIL import Image
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.schema import Document
 from langchain.document_loaders import PyPDFLoader
