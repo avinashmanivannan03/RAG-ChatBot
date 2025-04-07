@@ -8,6 +8,8 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.schema import Document
 from langchain.document_loaders import PyPDFLoader
+from langchain_community.embeddings import TogetherEmbeddings
+from langchain_together import TogetherEmbeddings
 import together
 import warnings
 warnings.filterwarnings("ignore")
@@ -103,7 +105,10 @@ if uploaded_file:
         docs = extract_text_from_pdf("temp.pdf")
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
         docs = text_splitter.split_documents(docs)
-        embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        embedding_model = TogetherEmbeddings(
+            model="togethercomputer/m2-bert-80M-32k-retrieval",
+            together_api_key=os.environ["TOGETHER_API_KEY"]
+        )
 
         db = FAISS.from_documents(docs, embedding_model)
 
